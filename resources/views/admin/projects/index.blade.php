@@ -21,7 +21,9 @@
                         {{-- fa quello che gli dico qui dentro se ci sono le cose, sennò fa l'altro - è un if insieme al foreach --}}
                         <td>
                             @forelse ($project->technologies as $technology)
-                                {{$technology->name}},
+                                <span class="badge rounded-pill" style="background-color: {{$technology->color}}">
+                                    {{$technology->name}},
+                                </span>
                             @empty
                                 <td>
                                     No technologies
