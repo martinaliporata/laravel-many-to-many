@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -30,7 +31,8 @@ class ProjectController extends Controller
     {
         $project = new Project();
         $types= Type::all();
-        return view('admin.projects.create', compact('project', 'types'));
+        $technologies = Technology::all();
+        return view('admin.projects.create', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -41,12 +43,12 @@ class ProjectController extends Controller
         // data e name son customizzati perché in create non ci sono dato che obv li cro io e ora
         $data =$request->validated();
 
-        $data['author']=Auth::user()->name;
+        $data['author']=Auth::user()->id;
         $data['date']=Carbon::now();
         // uso fillable - guarda in model
-        $newProject= new Project($data);
-        $newProject->save();
-
+        $newProject= Project::create($data);
+        // dopo che hai creato il project, prendilo, prendi etecnologie come rleaione e sincronizzaci la llista deu proettti che hai
+        $newProject->technologies()->sync($data["technologies"]);
         return redirect()->route('admin.projects.show', $newProject->id);
     }
 
@@ -65,7 +67,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types= Type::all();
-        return view('admin.projects.edit', compact("project", "types"));
+        $technologies = Technology::all();
+        return view('admin.projects.edit', compact("project", "types", "technologies"));
     }
 
     /**
@@ -76,6 +79,7 @@ class ProjectController extends Controller
         $data=$request->validated();
         $project = Project::findOrFail($id);
         $newProject=$project->update($data);
+        $project->technologies()->sync($data["technologies"]);
 
         return redirect()->route("admin.projects.show", $project);
     }
@@ -83,8 +87,11 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Project $project)
     {
-        //
+        $project->technologies()->detach();
+        $project->delete();
+
+        return redirect()->route('admin.projects.index');
     }
 }

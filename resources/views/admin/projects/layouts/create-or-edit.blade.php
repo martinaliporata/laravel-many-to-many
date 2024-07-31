@@ -36,6 +36,18 @@
                         <option value="{{$type->id}}"{{($type->id == old("type_id, $project->type_id")) ? "selected" : ""}}>{{$type->name}}</option>
                     @endforeach
                 </select>
+                {{-- per name="technologies[] guarda in storeprojectrequest --}}
+                {{-- da rivedere questa parte sotto --}}
+                <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                    @foreach ($technologies as $technology)
+                        @if($errors->any())
+                            <input name="technologies[]" type="checkbox" class="btn-check d-inline-block" id="technology-check- {{$technology->id}}" autocomplete="off" value="{{$technology->id}}" {{in_array($technology->id, old('technologies', [])) ? "checked" : ''}}>
+                        @else
+                            <input name="technologies[]" type="checkbox" class="btn-check d-inline-block" id="technology-check- {{$technology->id}}" autocomplete="off" value="{{$technology->id}}" {{$project->technologies->contains($technology) ? "checked" : ''}}>
+                        @enderror
+                        <label class="btn btn-outline-primary" for="technology-check- {{$technology->id}}">{{$technology->name}}</label>
+                    @endforeach
+                </div>
                 <input type="submit" value="@yield('page-title')" class="btn btn-primary">
                 <input type="reset" value="Reset form" class="btn btn-danger">
             </form>

@@ -26,6 +26,7 @@ class StoreProjectRequest extends FormRequest
             "preview"=>["required", "string", "min:3", "max:250"],
             // esiste nella tabella con la colonna id
             "type_id"=>["required", "integer", "exists:types,id"],
+            "technologies"=>["required", "array", "exists:technologies,id"],
         ];
     }
 }
