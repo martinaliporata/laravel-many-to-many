@@ -8,6 +8,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Type</th>
+                    <th scope="col">Technology</th>
                     <th scope="col">Title</th>
                     <th scope="col">Author</th>
                     <th scope="col">Date</th>
@@ -17,6 +18,16 @@
             <tbody>
                 @foreach ($projects as $project)
                     <tr>
+                        {{-- fa quello che gli dico qui dentro se ci sono le cose, sennò fa l'altro - è un if insieme al foreach --}}
+                        <td>
+                            @forelse ($project->technologies as $technology)
+                                {{$technology->name}},
+                            @empty
+                                <td>
+                                    No technologies
+                                </td>
+                            @endforelse
+                        </td>
                         <td>{{$project->id}}</td>
                         <td>{{$project->type->name}}</td>
                         <td>{{$project->title}}</td>
