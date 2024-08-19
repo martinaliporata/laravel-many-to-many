@@ -11,6 +11,7 @@ use App\Models\Type;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -43,6 +44,11 @@ class ProjectController extends Controller
         // data e name son customizzati perché in create non ci sono dato che obv li cro io e ora
         $data =$request->validated();
 
+        // prendo il file e lo metto in storage/img/projects
+        // salva nel db l'indirizzo locale a cui questo file uploadato si trova
+        $img_path = Storage::put('uploads/projects', $data['image']);
+
+        $data['image'] = $img_path;
         $data['author']=Auth::user()->id;
         $data['date']=Carbon::now();
         // uso fillable - guarda in model

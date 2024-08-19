@@ -16,6 +16,9 @@
             @endforelse
         </p>
         <h2 class="d-inline-block px-3" style="background: {{$project->type->colour}}">{{$project->type->name}}</h2>
+        <div class="image">
+            <img src="{{ asset('storage/' . $project->image)}}" alt="">
+        </div>
         <h2>{{$project->date}}</h2>
         <h2>{{$project->author}}</h2>
         <p>{{$project->preview}}</p>

@@ -32,12 +32,12 @@ class TypeController extends Controller
     public function store(Request $request)
     {
         // così è a mano, sennò c'è altro modo come al solito
-        $data = $request->validate(["
-        'name"=> "required|string|min:3|max:30|unique:types",
-        'colour'=>"required|hex_color"]
-        );
+        $data = $request->validate([
+        'name'=> "required|string|min:3|max:30|unique:types",
+        'colour'=>"required|hex_color"
+        ]);
         $type = Type::create($data);
-        return redirect()->route('admin.projects.show', $type);
+        return redirect()->route('admin.types.show', $type);
     }
 
     /**
@@ -63,7 +63,7 @@ class TypeController extends Controller
     public function update(Request $request, Type $type)
     {
         $data = $request->validate(["
-        'name"=> "required|string|min:3|max:30|unique:types",
+        'name"=> "string|min:3|max:30|unique:types",
         'colour'=>"required|hex_color"]
         );
 

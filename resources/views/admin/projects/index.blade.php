@@ -6,13 +6,16 @@
         <table class="table table-hover table-dark table-striped">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Type</th>
                     <th scope="col">Technology</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Type</th>
+                    <th scope="col"></th>
                     <th scope="col">Title</th>
                     <th scope="col">Author</th>
                     <th scope="col">Date</th>
                     <th scope="col">Preview</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Options</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,20 +25,22 @@
                         <td>
                             @forelse ($project->technologies as $technology)
                                 <span class="badge rounded-pill" style="background-color: {{$technology->color}}">
-                                    {{$technology->name}},
+                                    {{$technology->name}}
                                 </span>
                             @empty
-                                <td>
+                                <span>
                                     No technologies
-                                </td>
+                                </span>
                             @endforelse
                         </td>
                         <td>{{$project->id}}</td>
                         <td>{{$project->type->name}}</td>
+                        <td>{{$project->technology}}</td>
                         <td>{{$project->title}}</td>
-                        <td><em>{{$project->date}}</em></td>
                         <td>{{$project->author}}</td>
+                        <td>{{$project->date}}</td>
                         <td>{{$project->preview}}</td>
+                        <td>{{$project->image}}</td>
                         <td>
                             <a href="{{route('admin.projects.show', $project)}}" class="btn btn-success btn-sm">Show</a>
                             <a href="{{route('admin.projects.edit', $project)}}" class="btn btn-primary btn-sm">Edit</a>

@@ -24,6 +24,7 @@ class ProjectSeeder extends Seeder
             $newProject->type_id = $faker->randomElement($types);
             $newProject->title=$faker->realText(40);
             $newProject->author=$faker->name();
+            $newProject->image=$faker->image();
             $newProject->date=$faker->dateTimeThisMonth();
             $newProject->preview=$faker->imageUrl(400, 250, 'projects');
             $newProject->save();

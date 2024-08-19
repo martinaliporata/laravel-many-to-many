@@ -13,8 +13,9 @@ class Project extends Model
         'type_id',
         'title',
         'author',
+        'image',
         'date',
-        'preview'
+        'preview',
     ];
 
     public function type(){

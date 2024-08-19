@@ -11,6 +11,7 @@
                     <th scope="col">Id</th>
                     <th scope="col">Name</th>
                     <th scope="col">Colour</th>
+                    <th scope="col">Options</th>
                 </tr>
             </thead>
             <tbody>

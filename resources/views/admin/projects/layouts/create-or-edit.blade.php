@@ -15,7 +15,7 @@
                     </ul>
                 </div>
             @endif
-            <form action="@yield('form-action')" method="POST">
+            <form action="@yield('form-action')" method="POST" enctype="multipart/form-data">
                 @yield('form-method')
                 @csrf
                 <div>
@@ -30,6 +30,10 @@
                 <div class="mb-3">
                     <label for="preview">Preview</label>
                     <input type="text" name="preview" id="preview" class="form-control" value="{{old('preview', $project->preview)}}">
+                </div>
+                <div class="mb-3">
+                    <label for="image">Image Url</label>
+                    <input type="file" name="image" id="image" class="form-control mb-2" required value="{{old('image', $project->image)}}">
                 </div>
                 <select class="form-select px-3" aria-label="Default select example" name="type_id">
                     @foreach ($types as $type)

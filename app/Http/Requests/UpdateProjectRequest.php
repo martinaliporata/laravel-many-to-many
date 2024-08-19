@@ -26,6 +26,7 @@ class UpdateProjectRequest extends FormRequest
             "preview"=>["required", "string", "min:3", "max:250"],
             "type_id"=>["required", "integer", "exists:types,id"],
             "technologies"=>["required", "array", "exists:technologies,id"],
+            "image"=>["required", "image"]
         ];
     }
 }
