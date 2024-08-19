@@ -41,7 +41,7 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        // data e name son customizzati perché in create non ci sono dato che obv li cro io e ora
+        // data e name son customizzati perché in create non ci sono dato che obv li creo io e ora
         $data =$request->validated();
 
         // prendo il file e lo metto in storage/img/projects
