@@ -5,7 +5,7 @@
 @endsection
 
 @section('form-action')
-    {{route('admin.types.store')}}
+    {{route('admin.types.store', $type)}}
 @endsection
 
 @section('form-method')

@@ -16,7 +16,7 @@ class ProjectSeeder extends Seeder
     public function run(Faker $faker): void
     {
         // così prendo le categorie; oltre a ciò, devo aggiungere gli id delle categorie con il pluck
-        // che restituisci i valori di una determinata chiave (pluck->(id) vuol dire dammi solo gli id)
+        // che restituisce i valori di una determinata chiave (pluck->(id) vuol dire dammi solo gli id)
         $types= Type::all()->pluck('id');
         for($i=0; $i<50; $i++){
             $newProject = new Project();

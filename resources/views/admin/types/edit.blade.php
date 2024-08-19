@@ -1,7 +1,7 @@
 @extends(('admin.types.layouts.create-or-edit'))
 
 @section('page-title')
-    Edit project
+    Edit type
 @endsection
 
 @section('form-action')
